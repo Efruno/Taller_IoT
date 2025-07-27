@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- <meta http-equiv="refresh" content="3"> --><!-- Actualiza cada segundo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condiciones del taller</title>
+    <link rel = "stylesheet" type = "text/css" href = "css/dashboard.css"> 
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=1KO6FTfpSRmrJi15TcFiBBASUy5A_UE6HRgC3P5WapRywjE8fEQlgZHo8RceWH0J7DM0ny0bwU1wFzTwifLh8rG0DlOik5DYZIYDw0z0cUlziiv0uzc4S76Rr6V9mMsXnXgYhxycsG_p4ubJfJvoYQi4BYy8QZEzN74jMb6iAAGe9rzzEyv4UP6Zg_76tmv_vY5mse2kNyYFqsGvKNj3FryNXbSxyC3wuLaIc25l3hs" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9zaC1wcm80MC5ob3N0Z2F0b3IubXg6MjA4My9jcHNlc3M4OTA5MDIzNzcwL2Rvd25sb2FkP3NraXBlbmNvZGU9MSZmaWxlPSUyZmhvbWUzJTJmc2lzYXJ0YW4lMmZpbnZlcm5hZGVyby5taWN1cnNvZGVjaWVuY2lhcy5jb20lMmZpbmRleC5odG1s"/></head>
+<body>
+    
+    <div class="welcome-container">
+        <h2>¡Bienvenido!</h2>
+        <p>Hola, estimado! Los datos del taller son:</p>
+        <hr>
+        <h3>Temperatura</h3>
+        <div id="temperatureGauge"></div>
+        <hr>
+        <h3>Humedad</h3>
+        <div id="humidityGauge"></div>
+        <hr>
+        <button onclick="logout()">Reiniciar Sesión</button>
+    </div>
+
+    <script src="js-libs/raphael.min.js"></script>
+    <script src="js-libs/justgage.js"></script>
+    <script>
+        let temperatureGauge = new JustGage({
+            id: "temperatureGauge",
+            value: 0,
+            min: 0,
+            max: 50,
+            symbol: "°C",
+            pointer: true,
+            gaugeWidthScale: 0.7,
+            counter: true
+        });
+
+        let humidityGauge = new JustGage({
+            id: "humidityGauge",
+            value: 0,
+            min: 0,
+            max: 100,
+            symbol: "%",
+            pointer: true,
+            gaugeWidthScale: 0.7,
+            counter: true
+        });
+
+        function actualizarDatos() {
+            fetch("actualizaDatos.php") //datos.php
+            .then(res => res.json())
+            .then(data => {
+                temperatureGauge.refresh(data.temperature);
+                humidityGauge.refresh(data.humidity);
+            });
+        }
+
+        setInterval(actualizarDatos, 1000); // Actualiza cada 1000 milisegundos 1s en la pagína web
+        window.onload = actualizarDatos;
+
+        function logout() {
+            window.location.href = "index.html"; //index.html
+        }
+    </script>
+</body>
+</html>

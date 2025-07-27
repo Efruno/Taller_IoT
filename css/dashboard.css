@@ -1,0 +1,36 @@
+body, html {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('../img/taller.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .welcome-container {
+            background-image: linear-gradient(lightblue, rgb(6, 245, 241), rgb(14, 87, 244));
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .welcome-container h2 {
+            margin-bottom: 20px;
+        }
+        .welcome-container p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .welcome-container button {
+            padding: 10px 20px;
+            background-color: #1b0eb5;
+            color: #a3e5fb;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .welcome-container button:hover {
+            background-color: #1b0eb5;
+        }
